@@ -777,51 +777,6 @@ function render(){
   });
 }
 
-function renderUpcoming(){
-  const widget = $('upcomingWidget');
-  const now = new Date();
-  const upcoming = state.items
-    .filter(b => b.status === 'interview' && b.interview_date)
-    .filter(b => new Date(b.interview_date).getTime() > now.getTime() - 86400000)
-    .sort((a,b) => new Date(a.interview_date) - new Date(b.interview_date));
-
-  if (!upcoming.length){ widget.innerHTML = ''; return; }
-
-  if (state.widgetIndex >= upcoming.length) state.widgetIndex = 0;
-  if (state.widgetIndex < 0) state.widgetIndex = upcoming.length - 1;
-  const next = upcoming[state.widgetIndex];
-
-  const dt = new Date(next.interview_date);
-  const isToday = dt.toDateString() === now.toDateString();
-  const tmrw = new Date(now); tmrw.setDate(tmrw.getDate()+1);
-  const isTomorrow = dt.toDateString() === tmrw.toDateString();
-  const dayLabel = isToday ? 'HEUTE' : isTomorrow ? 'MORGEN' : dt.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
-  const timeLabel = dt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
-
-  let html = `
-    <div class="glass rounded-2xl p-5 cursor-pointer fade-in" data-id="${next.id}"
-         style="background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(239,68,68,0.06)); border: 1px solid rgba(245,158,11,0.3);">
-      <div class="flex items-center justify-between mb-3">
-        <div class="text-[10px] uppercase tracking-widest font-bold" style="color:#f59e0b;">🎤 Nächstes Interview</div>
-        ${upcoming.length>1 ? `<span class="text-[10px] text-amber-500/80">${state.widgetIndex+1}/${upcoming.length}</span>` : ''}
-      </div>
-      <div class="text-2xl font-bold text-white mb-1">${esc(next.company)}</div>
-      <div class="text-sm text-gray-300 mb-3 truncate">${esc(next.job_title)}</div>
-      <div class="flex items-center justify-between">
-        <div>
-          <div class="text-xs uppercase tracking-widest text-amber-400 font-bold">${dayLabel}</div>
-          <div class="text-3xl font-extrabold text-white">${timeLabel}</div>
-        </div>
-        ${upcoming.length>1 ? `
-          <div class="flex gap-2">
-            <button class="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-white" data-widget-nav="-1">⬅</button>
-            <button class="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-white/10 text-white" data-widget-nav="1">➡</button>
-          </div>` : ''}
-      </div>
-    </div>`;
-  widget.innerHTML = html;
-}
-
 // =============================================================
 // Modal (add/edit)
 // =============================================================
