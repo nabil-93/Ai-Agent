@@ -1,0 +1,119 @@
+================================================================================
+🚀 LANCER LE SYSTÈME LOCALEMENT (SANS DOCKER)
+================================================================================
+
+ÉTAPE 1: PRÉPARER L'ENVIRONNEMENT
+================================
+
+Ouvrez CMD et allez dans le dossier:
+
+  cd "c:\Users\nabil\Desktop\liste des P\AI Agent"
+
+Puis lancez le setup:
+
+  python setup_local.py
+
+(Ça va installer tous les packages Python nécessaires - ~5-10 minutes)
+
+
+ÉTAPE 2: LANCER LE BACKEND
+==========================
+
+Ouvrez une PREMIÈRE fenêtre CMD et lancez:
+
+  cd "c:\Users\nabil\Desktop\liste des P\AI Agent"
+  python -m uvicorn app.main:app --reload --port 8000
+
+Vous verrez:
+
+  INFO:     Uvicorn running on http://127.0.0.1:8000
+
+C'est bon! Le backend marche.
+
+
+ÉTAPE 3: LANCER LE FRONTEND
+===========================
+
+Ouvrez une DEUXIÈME fenêtre CMD et lancez:
+
+  cd "c:\Users\nabil\Desktop\liste des P\AI Agent\frontend"
+  npm install
+
+(Une seule fois - ça installe les packages Node.js)
+
+Puis:
+
+  npm run dev
+
+Vous verrez:
+
+  Local:   http://localhost:5173
+
+C'est bon! Le frontend marche.
+
+
+ÉTAPE 4: ACCÉDER À LA PLATEFORME
+================================
+
+Ouvrez votre navigateur et allez à:
+
+  👉 http://localhost:5173
+
+Vous verrez le tableau de bord!
+
+
+ACCÈS À L'API
+=============
+
+Documentation interactive:
+  http://localhost:8000/docs
+
+Tester des endpoints:
+  curl http://localhost:8000/jobs
+  curl http://localhost:8000/agents
+  curl http://localhost:8000/dashboard/stats
+
+
+ARRÊTER LES SERVICES
+====================
+
+Dans chaque fenêtre CMD, appuyez sur:
+  CTRL + C
+
+Pour arrêter le backend et le frontend.
+
+
+NOTES IMPORTANTES
+=================
+
+- Vous avez besoin de Node.js: https://nodejs.org/
+- Vous avez Python installé (puisque launch.py a marché)
+- La base de données est en SQLite (fichier data/jobs.db)
+- Plus simple que Docker, mais moins puissant
+- Pas de Redis/Celery (background tasks simplifiées)
+
+
+SI VOUS N'AVEZ PAS NODE.JS
+===========================
+
+1. Téléchargez: https://nodejs.org/ (version LTS)
+2. Installez-le
+3. Redémarrez votre PC
+4. Relancez: npm install && npm run dev
+
+
+RÉSUMÉ RAPIDE
+=============
+
+3 étapes:
+
+1. python setup_local.py
+2. python -m uvicorn app.main:app --reload --port 8000
+3. npm run dev
+
+Puis ouvrez:
+  http://localhost:5173
+
+Et c'est prêt! 🎉
+
+================================================================================

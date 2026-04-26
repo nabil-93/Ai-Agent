@@ -1,0 +1,94 @@
+================================================================================
+🚀 AI JOB AGENTS PLATFORM - DÉMARRAGE RAPIDE
+================================================================================
+
+POUR LANCER TOUT AUTOMATIQUEMENT:
+
+OPTION 1: Double-cliquez sur start.bat (Windows)
+OPTION 2: Ouvrez CMD et tapez:
+          cd "c:\Users\nabil\Desktop\liste des P\AI Agent"
+          python launch.py
+
+OPTION 3: Ou manuellement:
+          docker-compose up -d
+
+================================================================================
+
+APRÈS LE LANCEMENT (30 secondes):
+
+1. Ouvrez votre navigateur et allez à:
+   👉 http://localhost:3000
+
+2. Vous verrez le tableau de bord avec:
+   - Statistiques en direct
+   - Liste des emplois
+   - Panel de gestion des agents
+
+3. Pour accéder à l'API:
+   👉 http://localhost:8000/docs
+
+================================================================================
+
+SI VOUS TESTEZ AVEC CURL:
+
+Obtenir tous les emplois:
+  curl http://localhost:8000/jobs
+
+Lancer un agent (scraper):
+  curl -X POST http://localhost:8000/agents/1/run
+
+Voir les statistiques:
+  curl http://localhost:8000/dashboard/stats
+
+Mettre à jour un emploi:
+  curl -X PATCH http://localhost:8000/jobs/1 \
+    -H "Content-Type: application/json" \
+    -d '{"status": "envoye"}'
+
+================================================================================
+
+IDENTIFIANTS DE BASE DE DONNÉES:
+
+PostgreSQL (si vous voulez accéder directement):
+  Host: localhost
+  Port: 5432
+  User: jobagent
+  Password: jobagent123
+  Database: ai_job_agents
+
+Commande pour accéder:
+  docker-compose exec postgres psql -U jobagent -d ai_job_agents
+
+================================================================================
+
+ARRÊTER LES SERVICES:
+
+  docker-compose down
+
+VOIR LES LOGS:
+
+  docker-compose logs -f
+
+================================================================================
+
+DOCUMENTATION:
+
+- QUICKSTART.md: Guide rapide
+- API_REFERENCE.md: Tous les endpoints avec exemples
+- GUIDE_SIMPLE_FR_AR.md: Version simple en français et arabe
+- README.md: Vue d'ensemble complète
+
+================================================================================
+
+C'EST TOUT!
+
+Le système démarre maintenant avec:
+✅ Frontend React (http://localhost:3000)
+✅ API FastAPI (http://localhost:8000)
+✅ Base de données PostgreSQL
+✅ Cache Redis
+✅ Tâches Celery
+✅ Agents de scraping
+✅ Notifications Telegram (optionnel)
+
+================================================================================
